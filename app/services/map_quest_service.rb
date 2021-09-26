@@ -1,7 +1,7 @@
 class MapQuestService < ApiService
   class << self
     def base_url
-      "http://www.mapquestapi.com"
+      'http://www.mapquestapi.com'
     end
 
     def get_lat_long(city_state)
@@ -12,13 +12,13 @@ class MapQuestService < ApiService
     # TODO: refactor method as necessary..
     # (may not be needed based on how query params are sent??)
     def reformat_search(search_params)
-      search_params.gsub(/ /, '').downcase
+      search_params.delete(' ').downcase
     end
 
     private
 
     def key
-      "#{ENV['mq']}"
+      (ENV['mq']).to_s
     end
   end
 end

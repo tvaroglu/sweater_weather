@@ -5,7 +5,7 @@ RSpec.describe MapQuestFacade do
 
   context 'retrieve latitude and longitude from city and state' do
     it 'can retrieve the base url for API calls' do
-      expect(MapQuestService.base_url).to eq "http://www.mapquestapi.com"
+      expect(MapQuestService.base_url).to eq 'http://www.mapquestapi.com'
     end
 
     it 'can reformat search parameters' do
