@@ -9,5 +9,5 @@ ActiveRecord::Base.connection.tables.each do |t|
   ActiveRecord::Base.connection.reset_pk_sequence!(t)
 end
 
-user1 = create(:user, email: 'admin@example.com', password: 'guest')
-api_key1 = create(:api_key, user_id: user1.id)
+user1 = create(:user)
+user2 = user_with_api_key

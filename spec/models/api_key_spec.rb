@@ -6,8 +6,8 @@ RSpec.describe ApiKey, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:key) }
-    it { should validate_uniqueness_of(:key) }
+    it { should validate_presence_of(:value) }
+    it { should validate_uniqueness_of(:value) }
   end
 
   describe 'factories' do
