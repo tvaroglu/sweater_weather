@@ -10,9 +10,9 @@ describe 'Users::Create API', type: :request do
   describe 'POST /api/v1/users' do
     let!(:valid_body) do
       {
-        'email': 'admin@example.com',
-        'password': 'guest',
-        'password_confirmation': 'guest'
+        email: 'admin@example.com',
+        password: 'guest',
+        password_confirmation: 'guest'
       }
     end
 
@@ -33,6 +33,7 @@ describe 'Users::Create API', type: :request do
 
     context 'when the user record already exists' do
       let!(:existing_user) { user_with_api_key }
+
       before { post '/api/v1/users', params: valid_body }
 
       it 'returns an error that the user email is already taken', :aggregate_failures do
@@ -51,11 +52,12 @@ describe 'Users::Create API', type: :request do
     context 'when the password confirmation does not match the password' do
       let(:invalid_body) do
         {
-          'email': 'admin@example.com',
-          'password': 'guest',
-          'password_confirmation': 'GUEST',
+          email: 'admin@example.com',
+          password: 'guest',
+          password_confirmation: 'GUEST'
         }
       end
+
       before { post '/api/v1/users', params: invalid_body }
 
       it 'returns an error that the password confirmation does not match the password', :aggregate_failures do
@@ -74,10 +76,11 @@ describe 'Users::Create API', type: :request do
     context 'when the password confirmation is not provided' do
       let(:invalid_body) do
         {
-          'email': 'admin@example.com',
-          'password': 'guest',
+          email: 'admin@example.com',
+          password: 'guest'
         }
       end
+
       before { post '/api/v1/users', params: invalid_body }
 
       it 'returns an error that the password confirmation is required to create a user account', :aggregate_failures do

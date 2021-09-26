@@ -8,6 +8,6 @@ class User < ApplicationRecord
     api_keys.destroy_all
     new_key = api_keys.create!(value: SecureRandom.hex(13)).value
 
-    self.update!(api_key: new_key)
+    update!(api_key: new_key)
   end
 end

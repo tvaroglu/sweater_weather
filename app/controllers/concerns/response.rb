@@ -8,7 +8,7 @@ module Response
       json: {
         message: message,
         errors: [object_errors],
-        status: status.to_s.tr('_', ' ').titleize,
+        status: status.to_s.tr('_', ' ').titleize
         # code: Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
       },
       status: status
