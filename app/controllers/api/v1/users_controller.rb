@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   def create
     if user_params[:password_confirmation].blank?
-      json_error_response("'password_confirmation' is required to create a user account")
+      json_error_response(:bad_request, "'password_confirmation' is required to create a user account")
     else
       new_user = User.create!(user_params)
       if new_user.save

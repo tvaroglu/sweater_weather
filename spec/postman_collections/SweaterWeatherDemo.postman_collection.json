@@ -265,7 +265,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Unsuccessful POST Request\", function () {",
-									"    pm.expect(pm.response.code).to.eql(400);",
+									"    pm.expect(pm.response.code).to.eql(401);",
 									"});",
 									"",
 									"pm.test(\"Incorrect Password Error\", function () {",
@@ -313,7 +313,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Unsuccessful POST Request\", function () {",
-									"    pm.expect(pm.response.code).to.eql(400);",
+									"    pm.expect(pm.response.code).to.eql(401);",
 									"});",
 									"",
 									"pm.test(\"Password Missing Error\", function () {",
@@ -361,7 +361,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Unsuccessful POST Request\", function () {",
-									"    pm.expect(pm.response.code).to.eql(400);",
+									"    pm.expect(pm.response.code).to.eql(401);",
 									"});",
 									"",
 									"pm.test(\"User Not Found Error\", function () {",
