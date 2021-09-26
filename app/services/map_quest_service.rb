@@ -1,9 +1,5 @@
 class MapQuestService < ApiService
   class << self
-    def key
-      "#{ENV['mq']}"
-    end
-
     def base_url
       "http://www.mapquestapi.com"
     end
@@ -13,10 +9,16 @@ class MapQuestService < ApiService
       render_request(response.body)
     end
 
-    # TODO: remove or refactor method as necessary
+    # TODO: refactor method as necessary..
     # (may not be needed based on how query params are sent??)
     def reformat_search(search_params)
-      search_params.gsub(/ /, '')
+      search_params.gsub(/ /, '').downcase
+    end
+
+    private
+
+    def key
+      "#{ENV['mq']}"
     end
   end
 end
