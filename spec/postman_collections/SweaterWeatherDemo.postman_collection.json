@@ -258,7 +258,7 @@
 					"response": []
 				},
 				{
-					"name": "Existing User Missing Password",
+					"name": "Existing User Invalid Password",
 					"event": [
 						{
 							"listen": "test",
@@ -306,7 +306,7 @@
 					"response": []
 				},
 				{
-					"name": "Existing User Incorrect Password",
+					"name": "Existing User Missing Password",
 					"event": [
 						{
 							"listen": "test",
@@ -316,7 +316,7 @@
 									"    pm.expect(pm.response.code).to.eql(400);",
 									"});",
 									"",
-									"pm.test(\"User Not Found Error\", function () {",
+									"pm.test(\"Password Missing Error\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData['errors']).to.eql(['invalid credentials provided, please try again']);",
 									"});"
@@ -330,7 +330,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"foo@bar.com\",\n  \"password\": \"password\"\n}",
+							"raw": "{\n  \"email\": \"whatever@example.com\"\n//   \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -364,7 +364,7 @@
 									"    pm.expect(pm.response.code).to.eql(400);",
 									"});",
 									"",
-									"pm.test(\"Password Missing Error\", function () {",
+									"pm.test(\"User Not Found Error\", function () {",
 									"    var jsonData = pm.response.json();",
 									"    pm.expect(jsonData['errors']).to.eql(['invalid credentials provided, please try again']);",
 									"});"
@@ -378,7 +378,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"whatever@example.com\"\n//   \"password\": \"password\"\n}",
+							"raw": "{\n  \"email\": \"foo@bar.com\",\n  \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
