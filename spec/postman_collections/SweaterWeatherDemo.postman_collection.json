@@ -203,6 +203,205 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "User Login",
+			"item": [
+				{
+					"name": "Existing User Valid Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"pm.test(\"User Session Created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['data']['type']).to.eql('user');",
+									"    pm.expect(jsonData['data']['attributes']['email']).to.eql('whatever@example.com');",
+									"    pm.expect(jsonData['data']['attributes']['api_key']).to.not.be.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"whatever@example.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/sessions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Existing User Invalid Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(401);",
+									"});",
+									"",
+									"pm.test(\"Incorrect Password Error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['errors']).to.eql(['invalid credentials provided, please try again']);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"whatever@example.com\",\n  \"password\": \"passwOrd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/sessions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Existing User Missing Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(401);",
+									"});",
+									"",
+									"pm.test(\"Password Missing Error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['errors']).to.eql(['invalid credentials provided, please try again']);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"whatever@example.com\"\n//   \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/sessions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(401);",
+									"});",
+									"",
+									"pm.test(\"User Not Found Error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['errors']).to.eql(['invalid credentials provided, please try again']);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"foo@bar.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/sessions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

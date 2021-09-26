@@ -22,6 +22,12 @@ shared_examples 'status code 400' do
   end
 end
 
+shared_examples 'status code 401' do
+  it 'returns status code 401: unauthorized' do
+    expect(response).to have_http_status(:unauthorized)
+  end
+end
+
 shared_examples 'status code 404' do
   it 'returns status code 404: not found' do
     expect(response).to have_http_status(:not_found)
