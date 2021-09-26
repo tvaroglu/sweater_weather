@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "6bf7573d-9107-41d7-bd99-aedff8bb4487",
+		"name": "SweaterWeatherDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"item": [
+				{
+					"name": "Brand New User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(201);",
+									"});",
+									"",
+									"pm.test(\"User Created\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['data']['type']).to.eql('user');",
+									"    pm.expect(jsonData['data']['attributes']['email']).to.eql('whatever@example.com');",
+									"    pm.expect(jsonData['data']['attributes']['api_key']).to.not.be.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"whatever@example.com\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Already Exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(422);",
+									"});",
+									"",
+									"pm.test(\"User Already Exists Error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['errors']).to.eql(['Email has already been taken']);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"whatever@example.com\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password Confirmation Mismatch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(422);",
+									"});",
+									"",
+									"pm.test(\"Password Confirmation Mismatch Error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['errors']).to.eql([\"Password confirmation doesn't match Password\"]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"guest@example.com\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"PASSWORD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password Confirmation Missing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"",
+									"pm.test(\"Password Confirmation Missing Error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['errors']).to.eql([\"'password_confirmation' is required to create a user account\"]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
