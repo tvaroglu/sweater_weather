@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe MapQuestFacade do
+RSpec.describe ThirdPartyFacade do
   let(:city_state) { 'denver,co' }
 
-  context 'retrieve latitude and longitude from city and state' do
+  context 'when a city and state are provided' do
     it 'can retrieve the base url for API calls' do
       expect(MapQuestService.base_url).to eq 'http://www.mapquestapi.com'
     end
@@ -13,11 +13,11 @@ RSpec.describe MapQuestFacade do
     end
 
     it 'can return latitude and longitude from search parameters', :vcr do
-      expected = MapQuestFacade.get_lat_long(city_state)
+      expected = ThirdPartyFacade.get_lat_lon(city_state)
 
       expect(expected.city_state).to eq city_state
       expect(expected.lat.class).to eq Float
-      expect(expected.long.class).to eq Float
+      expect(expected.lon.class).to eq Float
     end
   end
 end

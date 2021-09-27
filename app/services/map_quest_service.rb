@@ -1,10 +1,10 @@
-class MapQuestService < ApiService
+class MapQuestService < ThirdPartyService
   class << self
     def base_url
       'http://www.mapquestapi.com'
     end
 
-    def get_lat_long(city_state)
+    def get_lat_lon(city_state)
       response = conn(base_url).get("/geocoding/v1/address?key=#{key}&location=#{city_state}")
       render_request(response.body)
     end

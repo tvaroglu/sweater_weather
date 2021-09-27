@@ -1,4 +1,4 @@
-class ApiService
+class ThirdPartyService
   class << self
     def conn(url)
       Faraday.new(url)
