@@ -10,8 +10,6 @@ describe 'Forecast::BookSearch API', type: :request do
   describe 'GET /api/v1/book-search' do
     let(:search_params) { 'denver,co' }
     let(:quantity) { 5 }
-    let!(:message) { 'your query could not be completed' }
-    let!(:error_message) { ['please provide a valid city and state'] }
 
     context 'when the user provides a valid city and state', :vcr do
       before { get "/api/v1/book-search?location=#{search_params}&quantity=#{quantity}" }
@@ -32,30 +30,88 @@ describe 'Forecast::BookSearch API', type: :request do
       include_examples 'status code 200'
     end
 
-    # context 'when the user does not provide a valid city and state', :vcr do
-    #   before { get '/api/v1/forecast?location=' }
-    #
-    #   it 'returns an error message', :aggregate_failures do
-    #     expect(json).not_to be_empty
-    #
-    #     expect(json[:message]).to eq message
-    #     expect(json[:errors]).to eq error_message
-    #   end
-    #
-    #   include_examples 'status code 400'
-    # end
-    #
-    # context 'when the user does not provide a location query parameter', :vcr do
-    #   before { get '/api/v1/forecast' }
-    #
-    #   it 'returns an error message', :aggregate_failures do
-    #     expect(json).not_to be_empty
-    #
-    #     expect(json[:message]).to eq message
-    #     expect(json[:errors]).to eq error_message
-    #   end
-    #
-    #   include_examples 'status code 400'
-    # end
+    describe 'edge cases' do
+      let!(:message) { 'your query could not be completed' }
+      let!(:location_error) { ['please provide a valid city and state'] }
+      let!(:quantity_error) { ['please provide a valid quantity'] }
+
+      context 'when the user does not provide a valid city and state', :vcr do
+        before { get '/api/v1/book-search?location=' }
+
+        it 'returns an error message', :aggregate_failures do
+          expect(json).not_to be_empty
+
+          expect(json[:message]).to eq message
+          expect(json[:errors]).to eq location_error
+        end
+
+        include_examples 'status code 400'
+      end
+
+      context 'when the user does not provide a location query parameter', :vcr do
+        before { get '/api/v1/book-search' }
+
+        it 'returns an error message', :aggregate_failures do
+          expect(json).not_to be_empty
+
+          expect(json[:message]).to eq message
+          expect(json[:errors]).to eq location_error
+        end
+
+        include_examples 'status code 400'
+      end
+
+      context 'when the user does not provide quantity as an integer value', :vcr do
+        before { get "/api/v1/book-search?location=#{search_params}&quantity=hdshsdhsh" }
+
+        it 'returns an error message', :aggregate_failures do
+          expect(json).not_to be_empty
+
+          expect(json[:message]).to eq message
+          expect(json[:errors]).to eq quantity_error
+        end
+
+        include_examples 'status code 400'
+      end
+
+      context 'when the user does not provide quantity as a positive integer', :vcr do
+        before { get "/api/v1/book-search?location=#{search_params}&quantity=0" }
+
+        it 'returns an error message', :aggregate_failures do
+          expect(json).not_to be_empty
+
+          expect(json[:message]).to eq message
+          expect(json[:errors]).to eq quantity_error
+        end
+
+        include_examples 'status code 400'
+      end
+
+      context 'when the user provides an empty quantity parameter', :vcr do
+        before { get "/api/v1/book-search?location=#{search_params}&quantity=" }
+
+        it 'returns an error message', :aggregate_failures do
+          expect(json).not_to be_empty
+
+          expect(json[:message]).to eq message
+          expect(json[:errors]).to eq quantity_error
+        end
+
+        include_examples 'status code 400'
+      end
+
+      context 'when the user does not provide a quantity parameter', :vcr do
+        before { get "/api/v1/book-search?location=#{search_params}" }
+
+        it 'returns an error message', :aggregate_failures do
+          expect(json).not_to be_empty
+
+          expect(json[:message]).to eq message
+          expect(json[:errors]).to eq quantity_error
+        end
+
+        include_examples 'status code 400'
+      end
+    end
   end
 end

@@ -40,7 +40,7 @@ module Response
     render json: object, status: status
   end
 
-  def json_error_response(status, message, errors)
+  def json_error_response(message, errors, status = :bad_request)
     render(
       json: {
         message: message,
