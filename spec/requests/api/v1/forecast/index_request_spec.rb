@@ -29,13 +29,13 @@ describe 'Forecast::Index API', type: :request do
     end
 
     context 'when the user does not provide a valid city and state', :vcr do
-      before { get "/api/v1/forecast?location=#{''}" }
+      before { get '/api/v1/forecast?location=' }
 
       it 'returns an error message', :aggregate_failures do
         expect(json).not_to be_empty
 
-        expect(json[:message]).to eq(message)
-        expect(json[:errors]).to eq(error_message)
+        expect(json[:message]).to eq message
+        expect(json[:errors]).to eq error_message
       end
 
       include_examples 'status code 400'
@@ -47,8 +47,8 @@ describe 'Forecast::Index API', type: :request do
       it 'returns an error message', :aggregate_failures do
         expect(json).not_to be_empty
 
-        expect(json[:message]).to eq(message)
-        expect(json[:errors]).to eq(error_message)
+        expect(json[:message]).to eq message
+        expect(json[:errors]).to eq error_message
       end
 
       include_examples 'status code 400'
