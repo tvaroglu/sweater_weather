@@ -20,7 +20,7 @@ module Response
     render json: object, status: status
   end
 
-  def json_error_response(status, errors, message = 'your record could not be saved')
+  def json_error_response(status, message, errors)
     render(
       json: {
         message: message,
