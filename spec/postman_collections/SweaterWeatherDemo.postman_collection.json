@@ -402,6 +402,492 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Landing Page",
+			"item": [
+				{
+					"name": "Forecast",
+					"item": [
+						{
+							"name": "Valid Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['data']['id']).to.be.null;",
+											"    pm.expect(jsonData['data']['type']).to.eql('forecast');",
+											"    pm.expect(Object.keys(jsonData['data']['attributes']['current_weather']).length).to.eql(10);",
+											"    pm.expect(jsonData['data']['attributes']['daily_weather'].length).to.eql(5);",
+											"    pm.expect(jsonData['data']['attributes']['hourly_weather'].length).to.eql(8);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/forecast?location=denver,co",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"forecast"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "denver,co"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Empty Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid city and state']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/forecast?location=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"forecast"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Missing Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid city and state']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/forecast",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"forecast"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Book Search",
+					"item": [
+						{
+							"name": "Valid Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['data']['id']).to.be.null;",
+											"    pm.expect(jsonData['data']['type']).to.eql('books');",
+											"    pm.expect(jsonData['data']['attributes']['destination']).to.eql('denver,co');",
+											"    pm.expect(Object.keys(jsonData['data']['attributes']['forecast']).length).to.eql(2);",
+											"    pm.expect(jsonData['data']['attributes']['total_books_found']).to.not.be.null;",
+											"    pm.expect(jsonData['data']['attributes']['books'].length).to.eql(5);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/book-search?location=denver,co&quantity=5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"book-search"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "denver,co"
+										},
+										{
+											"key": "quantity",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Empty Location Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid city and state']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/book-search?location=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"book-search"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Missing Location Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid city and state']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/book-search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"book-search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Bad Quantity Param (Non Integer)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid quantity']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/book-search?location=denver,co&quantity=dgsdgdsg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"book-search"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "denver,co"
+										},
+										{
+											"key": "quantity",
+											"value": "dgsdgdsg"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Bad Quantity Param (Integer)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid quantity']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/book-search?location=denver,co&quantity=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"book-search"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "denver,co"
+										},
+										{
+											"key": "quantity",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Empty Quantity Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid quantity']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/book-search?location=denver,co&quantity=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"book-search"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "denver,co"
+										},
+										{
+											"key": "quantity",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Missing Quantity Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid quantity']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/book-search?location=denver,co",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"book-search"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "denver,co"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	]
 }
