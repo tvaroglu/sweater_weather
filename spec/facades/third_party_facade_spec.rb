@@ -8,10 +8,12 @@ RSpec.describe ThirdPartyFacade do
     it 'can retrieve the base urls for API calls' do
       expect(MapQuestService.base_url).to eq 'http://www.mapquestapi.com'
       expect(OpenWeatherService.base_url).to eq 'https://api.openweathermap.org'
+      expect(OpenLibraryService.base_url).to eq 'https://openlibrary.org'
     end
 
     it 'can reformat search parameters' do
-      expect(MapQuestService.reformat_search('Denver, CO')).to eq city_state
+      expect(MapQuestService.reformat('Denver, CO')).to eq city_state
+      expect(OpenLibraryService.reformat(city_state)).to eq 'denver+co'
     end
 
     it 'can return latitude and longitude from search parameters', :vcr do
@@ -36,7 +38,7 @@ RSpec.describe ThirdPartyFacade do
       expect(current_weather.sunrise.class).to eq Time
       expect(current_weather.sunset.class).to eq Time
       expect(current_weather.temperature.class).to eq Float
-      expect(current_weather.uvi.class).to eq Integer
+      expect(current_weather.uvi.class).to eq Float
       expect(current_weather.visibility.class).to eq Integer
 
       daily_weather = expected[:daily_weather]
@@ -60,6 +62,22 @@ RSpec.describe ThirdPartyFacade do
         expect(record.icon.class).to eq String
         expect(record.time.class).to eq Time
         expect(record.temperature.class).to eq Float
+      end
+    end
+
+    it 'can return x number of books from a city/state search', :vcr do
+      expected = ThirdPartyFacade.get_books(city_state, 5)
+
+      expect(expected.size).to eq 3
+      expect(expected[:destination]).to eq city_state
+      expect(expected[:total_books_found].class).to eq Integer
+      expect(expected[:books].length).to eq 5
+
+      expected[:books].each do |book|
+        expect(book.class).to eq Book
+        expect(book.isbn.class).to eq Array
+        expect(book.publisher.class).to eq Array
+        expect(book.title.class).to eq String
       end
     end
   end

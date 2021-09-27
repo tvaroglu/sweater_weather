@@ -1,4 +1,25 @@
 module Response
+  def book_search_response(books_data, forecast_data, status = :ok)
+    render(
+      json: {
+        data: {
+          id: nil,
+          type: 'books',
+          attributes: {
+            destination: books_data[:destination],
+            forecast: {
+              summary: forecast_data.conditions,
+              temperature: "#{forecast_data.temperature.round} F"
+            },
+            total_books_found: books_data[:total_books_found],
+            books: books_data[:books]
+          }
+        }
+      },
+      status: status
+    )
+  end
+
   def forecast_response(forecast_data, status = :ok)
     render(
       json: {
@@ -20,13 +41,11 @@ module Response
     render json: object, status: status
   end
 
-  def json_error_response(status, message, errors)
+  def json_error_response(message, errors, status = :bad_request)
     render(
       json: {
         message: message,
         errors: [errors]
-        # status: status.to_s.tr('_', ' ').titleize
-        # code: Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
       },
       status: status
     )

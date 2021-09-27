@@ -11,7 +11,7 @@ class MapQuestService < ThirdPartyService
 
     # TODO: refactor method as necessary..
     # (may not be needed based on how query params are sent??)
-    def reformat_search(search_params)
+    def reformat(search_params)
       search_params.delete(' ').downcase
     end
 

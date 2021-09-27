@@ -1,11 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   def create
     if user_params[:password_confirmation].blank?
-      json_error_response(
-        :bad_request,
-        'your record could not be saved',
-        "'password_confirmation' is required to create a user account"
-      )
+      json_error_response('your record could not be saved', params_errors[:password_confirmation])
     else
       new_user = User.create!(user_params)
       if new_user.save
@@ -16,6 +12,10 @@ class Api::V1::UsersController < ApplicationController
   end
 
   private
+
+  def params_errors
+    { password_confirmation: "'password_confirmation' is required to create a user account" }
+  end
 
   def user_params
     params.permit(:email, :password, :password_confirmation)
