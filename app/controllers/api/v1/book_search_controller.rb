@@ -12,6 +12,8 @@ class Api::V1::BookSearchController < ApplicationController
     end
   end
 
+  private
+
   def params_errors
     {
       city_state: 'please provide a valid city and state',

@@ -16,7 +16,7 @@ class ThirdPartyFacade
 
     def get_books(location, quantity)
       query = OpenLibraryService.get_books(location)
-      formatted = {
+      {
         destination: location,
         total_books_found: query[:numFound],
         books: query[:docs][0..quantity.to_i - 1].map { |response_obj| Book.new(response_obj) }
