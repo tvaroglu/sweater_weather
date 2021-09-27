@@ -5,7 +5,7 @@ class OpenLibraryService < ThirdPartyService
     end
 
     def get_books(search_params)
-      response = conn(base_url).get("/search.json?title=#{reformat(search_params)}")
+      response = conn(base_url).get("/search.json?q=#{reformat(search_params)}")
       render_request(response.body)
     end
 

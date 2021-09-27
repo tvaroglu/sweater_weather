@@ -1,10 +1,17 @@
 class Book
-  attr_reader :isbn, :title, :publisher
+  attr_reader :isbn, :publisher, :title
 
   def initialize(response_obj)
-    # require "pry"; binding.pry
-    @isbn = response_obj[:isbn]
+    @isbn = if response_obj[:isbn]
+              response_obj[:isbn]
+            else
+              []
+            end
+    @publisher = if response_obj[:publisher]
+                   response_obj[:publisher]
+                 else
+                   []
+                 end
     @title = response_obj[:title]
-    @publisher = response_obj[:publisher]
   end
 end

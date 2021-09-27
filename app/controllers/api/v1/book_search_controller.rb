@@ -1,8 +1,10 @@
 class Api::V1::BookSearchController < ApplicationController
 
   def index
+    lat_lon = ThirdPartyFacade.get_lat_lon(params[:location])
+    current_forecast = ThirdPartyFacade.get_forecast(lat_lon.lat, lat_lon.lon)[:current_weather]
     books = ThirdPartyFacade.get_books(params[:location], params[:quantity])
-    require "pry"; binding.pry
+    book_search_response(books, current_forecast)
   end
 
 

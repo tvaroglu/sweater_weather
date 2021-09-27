@@ -36,7 +36,7 @@ RSpec.describe ThirdPartyFacade do
       expect(current_weather.sunrise.class).to eq Time
       expect(current_weather.sunset.class).to eq Time
       expect(current_weather.temperature.class).to eq Float
-      expect(current_weather.uvi.class).to eq Integer
+      expect(current_weather.uvi.class).to eq Float
       expect(current_weather.visibility.class).to eq Integer
 
       daily_weather = expected[:daily_weather]
@@ -65,7 +65,7 @@ RSpec.describe ThirdPartyFacade do
 
     it 'can return x number of books from a city/state search', :vcr do
       expected = ThirdPartyFacade.get_books(city_state, 5)
-      # require "pry"; binding.pry
+
       expect(expected.size).to eq 3
       expect(expected[:destination]).to eq city_state
       expect(expected[:total_books_found].class).to eq Integer

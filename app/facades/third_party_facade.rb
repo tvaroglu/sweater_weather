@@ -21,7 +21,6 @@ class ThirdPartyFacade
         total_books_found: query[:numFound],
         books: query[:docs][0..quantity.to_i - 1].map { |response_obj| Book.new(response_obj) }
       }
-      # require "pry"; binding.pry
     end
   end
 end
