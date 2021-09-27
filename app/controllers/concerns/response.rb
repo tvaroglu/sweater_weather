@@ -15,7 +15,8 @@ module Response
             books: books_data[:books]
           }
         }
-      }
+      },
+      status: status
     )
   end
 

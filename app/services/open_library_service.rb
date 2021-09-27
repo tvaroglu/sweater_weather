@@ -10,7 +10,7 @@ class OpenLibraryService < ThirdPartyService
     end
 
     def reformat(search_params)
-      search_params.gsub(/,/, '+')
+      search_params.tr(',', '+')
     end
   end
 end

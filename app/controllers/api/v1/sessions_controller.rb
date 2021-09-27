@@ -4,7 +4,8 @@ class Api::V1::SessionsController < ApplicationController
     if found_user && found_user.authenticate(user_params[:password])
       render json: UserSerializer.new(found_user).serializable_hash, status: :ok
     else
-      json_error_response('your record could not be saved', params_errors[:credentials], :unauthorized)
+      json_error_response('your record could not be saved', params_errors[:credentials],
+                          :unauthorized)
     end
   end
 
