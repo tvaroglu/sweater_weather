@@ -80,5 +80,16 @@ RSpec.describe ThirdPartyFacade do
         expect(book.title.class).to eq String
       end
     end
+
+    it 'can return an image from a city/state search', :vcr do
+      expected = ThirdPartyFacade.get_image(city_state)
+
+      expect(expected.class).to eq Image
+      expect(expected.location).to eq city_state
+      expect(expected.image_url.class).to eq String
+      expect(expected.provider).to eq 'Unsplash'
+      expect(expected.photographer.class).to eq String
+      expect(expected.photographer_profile_url.class).to eq String
+    end
   end
 end
