@@ -13,5 +13,15 @@ class ThirdPartyFacade
         hourly_weather: query[:hourly][0..7].map { |response_obj| HourlyForecast.new(response_obj) }
       }
     end
+
+    def get_books(location, quantity)
+      query = OpenLibraryService.get_books(location)
+      formatted = {
+        destination: location,
+        total_books_found: query[:numFound],
+        books: query[:docs][0..quantity.to_i - 1].map { |response_obj| Book.new(response_obj) }
+      }
+      # require "pry"; binding.pry
+    end
   end
 end

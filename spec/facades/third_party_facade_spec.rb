@@ -62,5 +62,21 @@ RSpec.describe ThirdPartyFacade do
         expect(record.temperature.class).to eq Float
       end
     end
+
+    it 'can return x number of books from a city/state search', :vcr do
+      expected = ThirdPartyFacade.get_books(city_state, 5)
+      # require "pry"; binding.pry
+      expect(expected.size).to eq 3
+      expect(expected[:destination]).to eq city_state
+      expect(expected[:total_books_found].class).to eq Integer
+      expect(expected[:books].length).to eq 5
+
+      expected[:books].each do |book|
+        expect(book.class).to eq Book
+        expect(book.isbn.class).to eq Array
+        expect(book.publisher.class).to eq Array
+        expect(book.title.class).to eq String
+      end
+    end
   end
 end
