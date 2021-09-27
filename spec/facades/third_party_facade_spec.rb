@@ -8,10 +8,12 @@ RSpec.describe ThirdPartyFacade do
     it 'can retrieve the base urls for API calls' do
       expect(MapQuestService.base_url).to eq 'http://www.mapquestapi.com'
       expect(OpenWeatherService.base_url).to eq 'https://api.openweathermap.org'
+      expect(OpenLibraryService.base_url).to eq 'https://openlibrary.org'
     end
 
     it 'can reformat search parameters' do
-      expect(MapQuestService.reformat_search('Denver, CO')).to eq city_state
+      expect(MapQuestService.reformat('Denver, CO')).to eq city_state
+      expect(OpenLibraryService.reformat(city_state)).to eq 'denver+co'
     end
 
     it 'can return latitude and longitude from search parameters', :vcr do
