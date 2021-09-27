@@ -22,8 +22,8 @@ describe 'Users::Create API', type: :request do
       it 'returns the user attributes and api key', :aggregate_failures do
         expect(json).not_to be_empty
 
-        expect(json_data.size).to eq(3)
-        expect(json_data[:attributes].size).to eq(2)
+        expect(json_data.size).to eq 3
+        expect(json_data[:attributes].size).to eq 2
         expect(json_data[:attributes][:email]).to eq valid_body[:email]
         expect(json_data[:attributes][:api_key]).to eq User.all.first.api_key
       end
@@ -42,8 +42,8 @@ describe 'Users::Create API', type: :request do
         message = 'your record could not be saved'
         error_message = ['Email has already been taken']
 
-        expect(json[:message]).to eq(message)
-        expect(json[:errors]).to eq(error_message)
+        expect(json[:message]).to eq message
+        expect(json[:errors]).to eq error_message
       end
 
       include_examples 'status code 422'
@@ -66,8 +66,8 @@ describe 'Users::Create API', type: :request do
         message = 'your record could not be saved'
         error_message = ["Password confirmation doesn't match Password"]
 
-        expect(json[:message]).to eq(message)
-        expect(json[:errors]).to eq(error_message)
+        expect(json[:message]).to eq message
+        expect(json[:errors]).to eq error_message
       end
 
       include_examples 'status code 422'
@@ -89,8 +89,8 @@ describe 'Users::Create API', type: :request do
         message = 'your record could not be saved'
         error_message = ["'password_confirmation' is required to create a user account"]
 
-        expect(json[:message]).to eq(message)
-        expect(json[:errors]).to eq(error_message)
+        expect(json[:message]).to eq message
+        expect(json[:errors]).to eq error_message
       end
 
       include_examples 'status code 400'

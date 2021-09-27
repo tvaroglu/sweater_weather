@@ -25,8 +25,10 @@ end
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
-  # config.filter_sensitive_data('DONT_SHARE_MY_SECRET_KEY') { ENV['yelp_api_key'] }
-  config.default_cassette_options = { re_record_interval: 7.days }
+  config.filter_sensitive_data('DONT_SHARE_MY_SECRET_KEY') { ENV['mq'] }
+  config.filter_sensitive_data('DONT_SHARE_MY_SECRET_KEY') { ENV['ow'] }
+  # TODO: understand why the record: :new_episodes block is required due to the OpenWeatherAPI calls..
+  config.default_cassette_options = { re_record_interval: 7.days, record: :new_episodes }
   config.configure_rspec_metadata!
 end
 # Requires supporting ruby files with custom matchers and macros, etc, in
