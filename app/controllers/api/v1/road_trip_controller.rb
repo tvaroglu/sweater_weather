@@ -7,7 +7,8 @@ class Api::V1::RoadTripController < ApplicationController
     else
       lat_lon = ThirdPartyFacade.get_lat_lon(user_params[:destination])
       route = ThirdPartyFacade.get_route(user_params[:origin], user_params[:destination])
-      forecast = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
+      forecast = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon,
+                                                           route.travel_time)
       road_trip_response(route, forecast)
     end
   end
