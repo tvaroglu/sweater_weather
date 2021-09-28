@@ -204,4 +204,4 @@ User Authentication     | [docs](/docs/users.md#create-session)          |
 
 **Road Trip Endpoint**            | [Docs](/docs/road_trip.md) | Examples
 ---------------------------|------------------------------------------|--------
-New User Registration     | [docs](/docs/road_trip.md#create-road-trip)          |
+Create New Road Trip     | [docs](/docs/road_trip.md#create-road-trip)          |
