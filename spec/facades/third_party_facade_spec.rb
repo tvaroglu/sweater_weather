@@ -9,6 +9,7 @@ RSpec.describe ThirdPartyFacade do
       expect(MapQuestService.base_url).to eq 'http://www.mapquestapi.com'
       expect(OpenWeatherService.base_url).to eq 'https://api.openweathermap.org'
       expect(OpenLibraryService.base_url).to eq 'https://openlibrary.org'
+      expect(UnsplashService.base_url).to eq 'https://api.unsplash.com'
     end
 
     it 'can reformat search parameters' do

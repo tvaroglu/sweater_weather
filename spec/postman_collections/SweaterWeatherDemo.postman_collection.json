@@ -886,6 +886,146 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Image Search",
+					"item": [
+						{
+							"name": "Valid Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(200);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['data']['id']).to.be.null;",
+											"    pm.expect(jsonData['data']['type']).to.eql('image');",
+											"    pm.expect(Object.keys(jsonData['data']['attributes']['image']).length).to.eql(2);",
+											"    pm.expect(jsonData['data']['attributes']['image']['location']).to.eql('denver,co');",
+											"    pm.expect(Object.keys(jsonData['data']['attributes']['credit']).length).to.eql(3);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/backgrounds?location=denver,co",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"backgrounds"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": "denver,co"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Empty Location Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid city and state']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/backgrounds?location=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"backgrounds"
+									],
+									"query": [
+										{
+											"key": "location",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Invalid Request - Missing Location Param",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Unsuccessful GET Request\", function () {",
+											"    pm.expect(pm.response.code).to.eql(400);",
+											"});",
+											"",
+											"pm.test(\"JSON Response Validation\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+											"    pm.expect(jsonData['errors']).to.eql(['please provide a valid city and state']);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/backgrounds",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"backgrounds"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

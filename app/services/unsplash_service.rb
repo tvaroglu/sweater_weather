@@ -15,12 +15,6 @@ class UnsplashService < ThirdPartyService
       render_request(response.body)
     end
 
-    # TODO: refactor method as necessary..
-    # (may not be needed based on how query params are sent??)
-    def reformat(search_params)
-      search_params.delete(' ').downcase
-    end
-
     private
 
     def key

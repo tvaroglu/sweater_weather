@@ -5,7 +5,9 @@ class OpenWeatherService < ThirdPartyService
     end
 
     def get_forecast(lat, lon)
-      response = conn(base_url).get("/data/2.5/onecall?appid=#{key}&lat=#{lat}&lon=#{lon}&exclude=minutely")
+      response = conn(base_url).get(
+        "/data/2.5/onecall?appid=#{key}&lat=#{lat}&lon=#{lon}&exclude=minutely"
+      )
       render_request(response.body)
     end
 
