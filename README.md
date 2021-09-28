@@ -4,7 +4,9 @@
 [![Issues][issues-shield]][issues-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Forks][forks-shield]][forks-url]
-
+</br>
+![Version][version-badge]
+[![Ruby Style Guide][rubocop-badge]][rubocop-url]
 
 
 
@@ -86,17 +88,6 @@ Learning goals and areas of focus consisted of:
 👤  **Taylor Varoglu**
 - Github: [Taylor Varoglu](https://github.com/tvaroglu)
 - LinkedIn: [Taylor Varoglu](https://www.linkedin.com/in/taylorvaroglu/)
-
-<!-- MARKDOWN LINKS & IMAGES -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/tvaroglu/sweater_weather.svg?style=flat
-[contributors-url]: https://github.com/tvaroglu/sweater_weather/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/tvaroglu/sweater_weather.svg?style=flat
-[forks-url]: https://github.com/tvaroglu/sweater_weather/network/members
-[stars-shield]: https://img.shields.io/github/stars/tvaroglu/sweater_weather.svg?style=flat
-[stars-url]: https://github.com/tvaroglu/sweater_weather/stargazers
-[issues-shield]: https://img.shields.io/github/issues/tvaroglu/sweater_weather.svg?style=flat
-[issues-url]: https://github.com/tvaroglu/sweater_weather/issues
 
 
 ## <ins>Setup</ins>
@@ -195,7 +186,7 @@ The following table presents each API endpoint and its associated documentation
 ---------------------------|------------------------------------------|--------
 Get Weather Forecast     | [docs](/docs/search.md#get-forecast)          | [example](http://localhost:3000/api/v1/forecast?location=denver,co)
 Get City Background     | [docs](/docs/search.md#get-background)          | [example](http://localhost:3000/api/v1/backgrounds?location=denver,co)
-Get Book Search     | [docs](/docs/search.md#get-books)          | [example](http://localhost:3000/api/v1/book-search?location=denver,co)
+Get Book Search     | [docs](/docs/search.md#get-books)          | [example](http://localhost:3000/api/v1/book-search?location=denver,co&quantity=5)
 
 **User Endpoints**            | [Docs](/docs/users.md) | Examples
 ---------------------------|------------------------------------------|--------
@@ -205,3 +196,18 @@ User Authentication     | [docs](/docs/users.md#create-session)          |
 **Road Trip Endpoint**            | [Docs](/docs/road_trip.md) | Examples
 ---------------------------|------------------------------------------|--------
 Create New Road Trip     | [docs](/docs/road_trip.md#create-road-trip)          |
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/tvaroglu/sweater_weather.svg?style=flat
+[contributors-url]: https://github.com/tvaroglu/sweater_weather/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/tvaroglu/sweater_weather.svg?style=flat
+[forks-url]: https://github.com/tvaroglu/sweater_weather/network/members
+[stars-shield]: https://img.shields.io/github/stars/tvaroglu/sweater_weather.svg?style=flat
+[stars-url]: https://github.com/tvaroglu/sweater_weather/stargazers
+[issues-shield]: https://img.shields.io/github/issues/tvaroglu/sweater_weather.svg?style=flat
+[issues-url]: https://github.com/tvaroglu/sweater_weather/issues
+[rubocop-badge]: https://img.shields.io/badge/code_style-rubocop-brightgreen.svg?style=flat
+[rubocop-url]: https://github.com/rubocop/rubocop
+[version-badge]: https://img.shields.io/badge/API_version-V1-or.svg?&style=flat&logoColor=white
