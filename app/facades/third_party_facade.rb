@@ -5,6 +5,11 @@ class ThirdPartyFacade
       LatLon.new(query[:results].first[:locations].first, city_state) if query[:results]
     end
 
+    def get_route(from, to)
+      query = MapQuestService.get_route(from, to)
+      Route.new(query[:route], from, to) if query[:route][:formattedTime].present?
+    end
+
     def get_forecast(lat, lon)
       query = OpenWeatherService.get_forecast(lat, lon)
       {

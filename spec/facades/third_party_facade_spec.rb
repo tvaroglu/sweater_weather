@@ -92,5 +92,25 @@ RSpec.describe ThirdPartyFacade do
       expect(expected.photographer.class).to eq String
       expect(expected.photographer_profile_url.class).to eq String
     end
+
+    describe '#get_route' do
+      let(:valid_destination) { 'Washington, DC' }
+      let(:invalid_destination) { 'London, UK' }
+
+      it 'can return a blank object for an impossible route', :vcr do
+        expected = ThirdPartyFacade.get_route(city_state, invalid_destination)
+
+        expect(expected).to be_blank
+      end
+
+      it 'can return a route object for a possible route', :vcr do
+        expected = ThirdPartyFacade.get_route(city_state, valid_destination)
+
+        expect(expected.from).to eq city_state
+        expect(expected.to).to eq valid_destination
+        expect(expected.travel_time.class).to eq String
+        expect(expected.formatted_travel_time.class).to eq String
+      end
+    end
   end
 end
