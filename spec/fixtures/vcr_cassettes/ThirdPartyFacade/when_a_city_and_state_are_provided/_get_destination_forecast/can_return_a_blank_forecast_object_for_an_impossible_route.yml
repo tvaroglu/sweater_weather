@@ -19,11 +19,11 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Tue, 28 Sep 2021 17:17:09 GMT
+      - Tue, 28 Sep 2021 17:20:13 GMT
       Content-Type:
       - application/json;charset=UTF-8
-      Content-Length:
-      - '1045'
+      Transfer-Encoding:
+      - chunked
       Access-Control-Allow-Methods:
       - OPTIONS,GET,POST
       Access-Control-Allow-Origin:
@@ -35,13 +35,13 @@ http_interactions:
       Geocodetransactioncount:
       - '1'
       Last-Modified:
-      - Tue, 28 Sep 2021 17:17:09 GMT
+      - Tue, 28 Sep 2021 17:20:13 GMT
       Pragma:
       - no-cache
       Reversegeocodetransactioncount:
       - '0'
       Set-Cookie:
-      - JSESSIONID=990888E602D3D390E08960325DF15991; Path=/; HttpOnly
+      - JSESSIONID=9A6EABA47480D0DFD0D8BFA5E3C0630B; Path=/; HttpOnly
       Status:
       - success
       Transactionweight:
@@ -52,8 +52,8 @@ http_interactions:
         Inc.","imageUrl":"http://api.mqcdn.com/res/mqlogo.gif","imageAltText":"\u00A9
         2021 MapQuest, Inc."},"messages":[]},"options":{"maxResults":-1,"thumbMaps":true,"ignoreLatLngInput":false},"results":[{"providedLocation":{"location":"Washington,
         DC"},"locations":[{"street":"","adminArea6":"","adminArea6Type":"Neighborhood","adminArea5":"Washington","adminArea5Type":"City","adminArea4":"District
-        of Columbia","adminArea4Type":"County","adminArea3":"DC","adminArea3Type":"State","adminArea1":"US","adminArea1Type":"Country","postalCode":"","geocodeQualityCode":"A5XAX","geocodeQuality":"CITY","dragPoint":false,"sideOfStreet":"N","linkId":"282772166","unknownInput":"","type":"s","latLng":{"lat":38.892062,"lng":-77.019912},"displayLatLng":{"lat":38.892062,"lng":-77.019912},"mapUrl":"http://www.mapquestapi.com/staticmap/v5/map?key=DONT_SHARE_MY_SECRET_KEY&type=map&size=225,160&locations=38.892062,-77.019912|marker-sm-50318A-1&scalebar=true&zoom=12&rand=-825863369"}]}]}'
-  recorded_at: Tue, 28 Sep 2021 17:17:09 GMT
+        of Columbia","adminArea4Type":"County","adminArea3":"DC","adminArea3Type":"State","adminArea1":"US","adminArea1Type":"Country","postalCode":"","geocodeQualityCode":"A5XAX","geocodeQuality":"CITY","dragPoint":false,"sideOfStreet":"N","linkId":"282772166","unknownInput":"","type":"s","latLng":{"lat":38.892062,"lng":-77.019912},"displayLatLng":{"lat":38.892062,"lng":-77.019912},"mapUrl":"http://www.mapquestapi.com/staticmap/v5/map?key=DONT_SHARE_MY_SECRET_KEY&type=map&size=225,160&locations=38.892062,-77.019912|marker-sm-50318A-1&scalebar=true&zoom=12&rand=-575548700"}]}]}'
+  recorded_at: Tue, 28 Sep 2021 17:20:13 GMT
 - request:
     method: get
     uri: http://www.mapquestapi.com/directions/v2/route?from=denver,co&key=DONT_SHARE_MY_SECRET_KEY&to=london,uk
@@ -73,17 +73,17 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Tue, 28 Sep 2021 17:17:09 GMT
+      - Tue, 28 Sep 2021 17:20:13 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
       - '278'
       Set-Cookie:
-      - JSESSIONID=17F8F480544C1F87F181D79BFC00A132; Path=/directions; HttpOnly
+      - JSESSIONID=9E5D09751E596CC291085A0828EC202D; Path=/directions; HttpOnly
       Expires:
       - Mon, 20 Dec 1998 01:00:00 GMT
       Last-Modified:
-      - Tue, 28 Sep 2021 17:17:09 GMT
+      - Tue, 28 Sep 2021 17:20:13 GMT
       Cache-Control:
       - no-cache, must-revalidate
       Pragma:
@@ -100,7 +100,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: !binary |-
         eyJyb3V0ZSI6eyJyb3V0ZUVycm9yIjp7ImVycm9yQ29kZSI6MiwibWVzc2FnZSI6IiJ9fSwiaW5mbyI6eyJzdGF0dXNjb2RlIjo0MDIsImNvcHlyaWdodCI6eyJpbWFnZUFsdFRleHQiOiLCqSAyMDIxIE1hcFF1ZXN0LCBJbmMuIiwiaW1hZ2VVcmwiOiJodHRwOi8vYXBpLm1xY2RuLmNvbS9yZXMvbXFsb2dvLmdpZiIsInRleHQiOiLCqSAyMDIxIE1hcFF1ZXN0LCBJbmMuIn0sIm1lc3NhZ2VzIjpbIldlIGFyZSB1bmFibGUgdG8gcm91dGUgd2l0aCB0aGUgZ2l2ZW4gbG9jYXRpb25zLiJdfX0=
-  recorded_at: Tue, 28 Sep 2021 17:17:09 GMT
+  recorded_at: Tue, 28 Sep 2021 17:20:13 GMT
 - request:
     method: get
     uri: https://api.openweathermap.org/data/2.5/onecall?appid=DONT_SHARE_MY_SECRET_KEY&exclude=current,daily,minutely&lat=38.892062&lon=-77.019912
@@ -122,7 +122,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Tue, 28 Sep 2021 17:17:10 GMT
+      - Tue, 28 Sep 2021 17:20:14 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -188,7 +188,7 @@ http_interactions:
         sky","icon":"01d"}],"pop":0},{"dt":1633014000,"temp":291.73,"feels_like":290.95,"pressure":1021,"humidity":50,"dew_point":280.79,"uvi":3.22,"clouds":0,"visibility":10000,"wind_speed":3.36,"wind_deg":355,"wind_gust":4.87,"weather":[{"id":800,"main":"Clear","description":"clear
         sky","icon":"01d"}],"pop":0},{"dt":1633017600,"temp":292.56,"feels_like":291.81,"pressure":1021,"humidity":48,"dew_point":281.04,"uvi":4.49,"clouds":0,"visibility":10000,"wind_speed":3.59,"wind_deg":347,"wind_gust":5.02,"weather":[{"id":800,"main":"Clear","description":"clear
         sky","icon":"01d"}],"pop":0}]}'
-  recorded_at: Tue, 28 Sep 2021 17:17:10 GMT
+  recorded_at: Tue, 28 Sep 2021 17:20:14 GMT
 - request:
     method: get
     uri: https://api.openweathermap.org/data/2.5/onecall?appid=DONT_SHARE_MY_SECRET_KEY&exclude=current,daily,minutely&lat=38.892062&lon=-77.019912
@@ -210,7 +210,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Tue, 28 Sep 2021 17:17:27 GMT
+      - Tue, 28 Sep 2021 17:20:35 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -227,9 +227,9 @@ http_interactions:
       - GET, POST
     body:
       encoding: UTF-8
-      string: '{"lat":38.8921,"lon":-77.0199,"timezone":"America/New_York","timezone_offset":-14400,"hourly":[{"dt":1632848400,"temp":298.46,"feels_like":298.85,"pressure":1010,"humidity":69,"dew_point":292.37,"uvi":4.77,"clouds":75,"visibility":10000,"wind_speed":3.21,"wind_deg":263,"wind_gust":6.49,"weather":[{"id":803,"main":"Clouds","description":"broken
-        clouds","icon":"04d"}],"pop":0.04},{"dt":1632852000,"temp":298.97,"feels_like":299.28,"pressure":1010,"humidity":64,"dew_point":291.65,"uvi":4.48,"clouds":77,"visibility":10000,"wind_speed":3.08,"wind_deg":268,"wind_gust":5.56,"weather":[{"id":803,"main":"Clouds","description":"broken
-        clouds","icon":"04d"}],"pop":0},{"dt":1632855600,"temp":299.76,"feels_like":299.76,"pressure":1010,"humidity":59,"dew_point":291.09,"uvi":2.12,"clouds":67,"visibility":10000,"wind_speed":3.79,"wind_deg":280,"wind_gust":6.52,"weather":[{"id":803,"main":"Clouds","description":"broken
+      string: '{"lat":38.8921,"lon":-77.0199,"timezone":"America/New_York","timezone_offset":-14400,"hourly":[{"dt":1632848400,"temp":298.45,"feels_like":298.84,"pressure":1010,"humidity":69,"dew_point":292.36,"uvi":4.77,"clouds":75,"visibility":10000,"wind_speed":3.21,"wind_deg":263,"wind_gust":6.49,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"pop":0.04},{"dt":1632852000,"temp":298.96,"feels_like":299.27,"pressure":1010,"humidity":64,"dew_point":291.64,"uvi":4.48,"clouds":77,"visibility":10000,"wind_speed":3.08,"wind_deg":268,"wind_gust":5.56,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"pop":0},{"dt":1632855600,"temp":299.75,"feels_like":299.75,"pressure":1010,"humidity":59,"dew_point":291.08,"uvi":2.12,"clouds":67,"visibility":10000,"wind_speed":3.79,"wind_deg":280,"wind_gust":6.52,"weather":[{"id":803,"main":"Clouds","description":"broken
         clouds","icon":"04d"}],"pop":0.11},{"dt":1632859200,"temp":299.75,"feels_like":299.75,"pressure":1010,"humidity":57,"dew_point":290.54,"uvi":1.31,"clouds":70,"visibility":10000,"wind_speed":2.85,"wind_deg":282,"wind_gust":5.96,"weather":[{"id":803,"main":"Clouds","description":"broken
         clouds","icon":"04d"}],"pop":0.23},{"dt":1632862800,"temp":298.48,"feels_like":298.71,"pressure":1010,"humidity":63,"dew_point":290.93,"uvi":0.6,"clouds":77,"visibility":10000,"wind_speed":1.38,"wind_deg":315,"wind_gust":3.14,"weather":[{"id":500,"main":"Rain","description":"light
         rain","icon":"10d"}],"pop":0.29,"rain":{"1h":0.19}},{"dt":1632866400,"temp":296.37,"feels_like":296.6,"pressure":1010,"humidity":71,"dew_point":290.66,"uvi":0.14,"clouds":83,"visibility":10000,"wind_speed":3.32,"wind_deg":349,"wind_gust":7.25,"weather":[{"id":500,"main":"Rain","description":"light
@@ -276,5 +276,5 @@ http_interactions:
         sky","icon":"01d"}],"pop":0},{"dt":1633014000,"temp":291.73,"feels_like":290.95,"pressure":1021,"humidity":50,"dew_point":280.79,"uvi":3.22,"clouds":0,"visibility":10000,"wind_speed":3.36,"wind_deg":355,"wind_gust":4.87,"weather":[{"id":800,"main":"Clear","description":"clear
         sky","icon":"01d"}],"pop":0},{"dt":1633017600,"temp":292.56,"feels_like":291.81,"pressure":1021,"humidity":48,"dew_point":281.04,"uvi":4.49,"clouds":0,"visibility":10000,"wind_speed":3.59,"wind_deg":347,"wind_gust":5.02,"weather":[{"id":800,"main":"Clear","description":"clear
         sky","icon":"01d"}],"pop":0}]}'
-  recorded_at: Tue, 28 Sep 2021 17:17:27 GMT
+  recorded_at: Tue, 28 Sep 2021 17:20:35 GMT
 recorded_with: VCR 6.0.0
