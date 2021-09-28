@@ -134,8 +134,8 @@ This project requires Ruby 2.7.2 and Rails 5.2.6.
   - This repository requires access to the following services:
     1. [OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
     2. [MapQuest Geocoding & Route APIs](https://developer.mapquest.com/documentation/)
-      1. [Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/address/get/)
-      2. [Route API](https://developer.mapquest.com/documentation/directions-api/route/get/)
+      - [Geocoding API](https://developer.mapquest.com/documentation/geocoding-api/address/get/)
+      - [Route API](https://developer.mapquest.com/documentation/directions-api/route/get/)
     3. [Unsplash JSON API](https://unsplash.com/documentation)
 
 
