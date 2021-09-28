@@ -1,5 +1,5 @@
 module Response
-  def road_trip_response(route_data, forecast_data, status = :ok)
+  def road_trip_response(route_data, forecast_data, status = :created)
     render(
       json: {
         data: {
