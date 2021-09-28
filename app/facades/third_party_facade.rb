@@ -10,6 +10,12 @@ class ThirdPartyFacade
       Route.new(query[:route], from, to) if query[:route][:formattedTime].present?
     end
 
+    def get_destination_forecast(lat, lon, travel_time)
+      query = OpenWeatherService.get_hourly_forecast(lat, lon)
+      index = (travel_time[0..1].to_i + (travel_time[3..4].to_i / 60.to_f)).round
+      HourlyForecast.new(query[:hourly][index])
+    end
+
     def get_forecast(lat, lon)
       query = OpenWeatherService.get_forecast(lat, lon)
       {
