@@ -66,15 +66,15 @@ http_interactions:
       Date:
       - Tue, 28 Sep 2021 00:12:36 GMT
       Age:
-      - '4669'
+      - '4668'
       X-Served-By:
-      - cache-dca17769-DCA, cache-den8266-DEN
+      - cache-dca17769-DCA, cache-den8245-DEN
       X-Cache:
       - MISS, HIT
       X-Cache-Hits:
-      - 0, 2
+      - 0, 1
       X-Timer:
-      - S1632787956.152353,VS0,VE0
+      - S1632787956.432877,VS0,VE1
       Vary:
       - Accept-Encoding, Origin,Authorization,client-geo-region
     body:

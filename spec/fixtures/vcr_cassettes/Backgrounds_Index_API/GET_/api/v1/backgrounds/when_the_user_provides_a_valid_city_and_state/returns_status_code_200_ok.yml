@@ -68,13 +68,13 @@ http_interactions:
       Age:
       - '4669'
       X-Served-By:
-      - cache-dca17769-DCA, cache-den8266-DEN
+      - cache-dca17769-DCA, cache-den8258-DEN
       X-Cache:
       - MISS, HIT
       X-Cache-Hits:
       - 0, 2
       X-Timer:
-      - S1632787956.152353,VS0,VE0
+      - S1632787957.516065,VS0,VE0
       Vary:
       - Accept-Encoding, Origin,Authorization,client-geo-region
     body:
