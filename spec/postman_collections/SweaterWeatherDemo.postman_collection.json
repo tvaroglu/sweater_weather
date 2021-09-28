@@ -1028,6 +1028,267 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Road Trip",
+			"item": [
+				{
+					"name": "Authenticated User - Valid Route",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(201);",
+									"});",
+									"",
+									"pm.test(\"JSON Response Validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['data']['id']).to.be.null;",
+									"    pm.expect(jsonData['data']['type']).to.eql('roadtrip');",
+									"    pm.expect(Object.keys(jsonData['data']['attributes']).length).to.eql(4);",
+									"    pm.expect(jsonData['data']['attributes']['start_city']).to.eql('Denver,CO');",
+									"    pm.expect(jsonData['data']['attributes']['end_city']).to.eql('Pueblo,CO');",
+									"    pm.expect(Object.keys(jsonData['data']['attributes']['weather_at_eta']).length).to.eql(2);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"origin\": \"Denver,CO\",\n  \"destination\": \"Pueblo,CO\",\n  \"api_key\": \"012ffeafdc8dd8b182718f9240\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/road_trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"road_trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticated User - Invalid Route",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(201);",
+									"});",
+									"",
+									"pm.test(\"JSON Response Validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['data']['id']).to.be.null;",
+									"    pm.expect(jsonData['data']['type']).to.eql('roadtrip');",
+									"    pm.expect(Object.keys(jsonData['data']['attributes']).length).to.eql(4);",
+									"    pm.expect(jsonData['data']['attributes']['start_city']).to.eql('Denver,CO');",
+									"    pm.expect(jsonData['data']['attributes']['end_city']).to.eql('London,UK');",
+									"    pm.expect(jsonData['data']['attributes']['travel_time']).to.eql('Impossible Route');",
+									"    pm.expect(Object.keys(jsonData['data']['attributes']['weather_at_eta']).length).to.eql(2);",
+									"    pm.expect(jsonData['data']['attributes']['weather_at_eta']['temperature']).to.be.null;",
+									"    pm.expect(jsonData['data']['attributes']['weather_at_eta']['conditions']).to.be.null;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"origin\": \"Denver,CO\",\n  \"destination\": \"London,UK\",\n  \"api_key\": \"012ffeafdc8dd8b182718f9240\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/road_trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"road_trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthenticated User - Bad API Key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(401);",
+									"});",
+									"",
+									"pm.test(\"JSON Response Validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+									"    pm.expect(jsonData['errors']).to.eql(['invalid API key']);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"origin\": \"Denver,CO\",\n  \"destination\": \"Pueblo,CO\",\n  \"api_key\": \"fdsfsdf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/road_trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"road_trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthenticated User - Missing API Key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(401);",
+									"});",
+									"",
+									"pm.test(\"JSON Response Validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+									"    pm.expect(jsonData['errors']).to.eql(['invalid API key']);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"origin\": \"Denver,CO\",\n  \"destination\": \"London,UK\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/road_trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"road_trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticated User - Missing Route Params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unsuccessful POST Request\", function () {",
+									"    pm.expect(pm.response.code).to.eql(400);",
+									"});",
+									"",
+									"pm.test(\"JSON Response Validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData['message']).to.eql('your query could not be completed');",
+									"    pm.expect(jsonData['errors']).to.eql(['origin and destination are required to plan a route']);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"origin\": \"Denver,CO\",\n  \"api_key\": \"012ffeafdc8dd8b182718f9240\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/road_trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"road_trip"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
