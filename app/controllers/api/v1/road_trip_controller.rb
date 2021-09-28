@@ -3,11 +3,12 @@ class Api::V1::RoadTripController < ApplicationController
     if user_params[:api_key].blank? || ApiKey.find_by(value: user_params[:api_key]).blank?
       json_error_response('your query could not be completed', params_errors[:auth], :unauthorized)
     elsif user_params[:origin].blank? || user_params[:destination].blank?
-      json_error_response('your query could not be completed', params_errors[:missing_inputs])
+      json_error_response('your query could not be completed', params_errors[:route])
     else
       lat_lon = ThirdPartyFacade.get_lat_lon(user_params[:destination])
       route = ThirdPartyFacade.get_route(user_params[:origin], user_params[:destination])
-      forecast = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon, route.travel_time) if route
+      forecast = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
+      road_trip_response(route, forecast)
     end
   end
 
@@ -16,8 +17,7 @@ class Api::V1::RoadTripController < ApplicationController
   def params_errors
     {
       auth: 'invalid API key',
-      route: 'impossible route',
-      missing_inputs: 'origin and destination are required to plan a route'
+      route: 'origin and destination are required to plan a route'
     }
   end
 

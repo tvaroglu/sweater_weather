@@ -97,19 +97,48 @@ RSpec.describe ThirdPartyFacade do
       let(:valid_destination) { 'Washington, DC' }
       let(:invalid_destination) { 'London, UK' }
 
-      it 'can return a blank object for an impossible route', :vcr do
-        expected = ThirdPartyFacade.get_route(city_state, invalid_destination)
-
-        expect(expected).to be_blank
-      end
-
       it 'can return a route object for a possible route', :vcr do
         expected = ThirdPartyFacade.get_route(city_state, valid_destination)
 
         expect(expected.from).to eq city_state
         expect(expected.to).to eq valid_destination
         expect(expected.travel_time.class).to eq String
+        expect(expected.travel_time).not_to eq 'Impossible Route'
         expect(expected.formatted_travel_time.class).to eq String
+        expect(expected.formatted_travel_time).not_to eq 'Impossible Route'
+      end
+
+      it 'can return a route object for an impossible route', :vcr do
+        expected = ThirdPartyFacade.get_route(city_state, invalid_destination)
+
+        expect(expected.travel_time).to eq 'Impossible Route'
+        expect(expected.formatted_travel_time).to eq 'Impossible Route'
+      end
+    end
+
+    describe '#get_destination_forecast' do
+      let(:valid_destination) { 'Washington, DC' }
+      let(:invalid_destination) { 'London, UK' }
+
+      it 'can return a forecast object for a possible route', :vcr do
+        lat_lon = ThirdPartyFacade.get_lat_lon(valid_destination)
+        route = ThirdPartyFacade.get_route(city_state, valid_destination)
+        expected = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
+
+        expect(route.travel_time).not_to eq 'Impossible Route'
+        expect(route.formatted_travel_time).not_to eq 'Impossible Route'
+        expect(expected.conditions.class).to eq String
+        expect(expected.temperature.class).to eq Float
+      end
+
+      it 'can return a blank forecast object for an impossible route', :vcr do
+        lat_lon = ThirdPartyFacade.get_lat_lon(valid_destination)
+        route = ThirdPartyFacade.get_route(city_state, invalid_destination)
+        expected = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
+
+        expect(route.travel_time).to eq 'Impossible Route'
+        expect(route.formatted_travel_time).to eq 'Impossible Route'
+        expect(expected).to be_blank
       end
     end
   end

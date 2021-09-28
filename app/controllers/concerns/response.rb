@@ -1,4 +1,25 @@
 module Response
+  def road_trip_response(route_data, forecast_data, status = :ok)
+    render(
+      json: {
+        data: {
+          id: nil,
+          type: 'roadtrip',
+          attributes: {
+            start_city: route_data.from,
+            end_city: route_data.to,
+            travel_time: route_data.formatted_travel_time,
+            weather_at_eta: {
+              temperature: forecast_data.present? ? forecast_data.temperature : nil,
+              conditions: forecast_data.present? ? forecast_data.conditions : nil
+            }
+          }
+        }
+      },
+      status: status
+    )
+  end
+
   def image_response(image_data, status = :ok)
     render(
       json: {

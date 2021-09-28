@@ -4,8 +4,12 @@ class Route
   def initialize(data, from, to)
     @from = from
     @to = to
-    @travel_time = data[:formattedTime]
-    @formatted_travel_time = reformat(@travel_time)
+    @travel_time = data[:formattedTime] ||= 'Impossible Route'
+    @formatted_travel_time = if @travel_time == 'Impossible Route'
+                               @travel_time
+                             else
+                               reformat(@travel_time)
+                             end
   end
 
   def reformat(travel_time)
