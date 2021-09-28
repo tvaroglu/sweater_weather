@@ -9,6 +9,7 @@ RSpec.describe ThirdPartyFacade do
       expect(MapQuestService.base_url).to eq 'http://www.mapquestapi.com'
       expect(OpenWeatherService.base_url).to eq 'https://api.openweathermap.org'
       expect(OpenLibraryService.base_url).to eq 'https://openlibrary.org'
+      expect(UnsplashService.base_url).to eq 'https://api.unsplash.com'
     end
 
     it 'can reformat search parameters' do
@@ -79,6 +80,17 @@ RSpec.describe ThirdPartyFacade do
         expect(book.publisher.class).to eq Array
         expect(book.title.class).to eq String
       end
+    end
+
+    it 'can return an image from a city/state search', :vcr do
+      expected = ThirdPartyFacade.get_image(city_state)
+
+      expect(expected.class).to eq Image
+      expect(expected.location).to eq city_state
+      expect(expected.image_url.class).to eq String
+      expect(expected.provider).to eq 'Unsplash'
+      expect(expected.photographer.class).to eq String
+      expect(expected.photographer_profile_url.class).to eq String
     end
   end
 end

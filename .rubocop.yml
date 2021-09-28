@@ -69,10 +69,11 @@ Metrics/ClassLength:
     - 'spec/**/*.rb'
 
 Metrics/MethodLength:
-  Max: 15
+  Max: 10
   Exclude:
     - 'spec/**/*.rb'
     - 'app/serializers/**/*.rb'
+    - 'app/controllers/concerns/response.rb'
 
 Metrics/ModuleLength:
   Exclude:

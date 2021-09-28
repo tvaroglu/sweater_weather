@@ -22,5 +22,10 @@ class ThirdPartyFacade
         books: query[:docs][0..quantity.to_i - 1].map { |response_obj| Book.new(response_obj) }
       }
     end
+
+    def get_image(city_state)
+      query = UnsplashService.get_image(city_state)
+      Image.new(query[:results].first, city_state) if query[:results]
+    end
   end
 end

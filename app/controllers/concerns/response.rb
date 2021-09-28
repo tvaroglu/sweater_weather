@@ -1,18 +1,20 @@
 module Response
-  def book_search_response(books_data, forecast_data, status = :ok)
+  def image_response(image_data, status = :ok)
     render(
       json: {
         data: {
           id: nil,
-          type: 'books',
+          type: 'image',
           attributes: {
-            destination: books_data[:destination],
-            forecast: {
-              summary: forecast_data.conditions,
-              temperature: "#{forecast_data.temperature.round} F"
+            image: {
+              location: image_data.location,
+              image_url: image_data.image_url
             },
-            total_books_found: books_data[:total_books_found],
-            books: books_data[:books]
+            credit: {
+              provider: image_data.provider,
+              photographer: image_data.photographer,
+              photographer_profile_url: image_data.photographer_profile_url
+            }
           }
         }
       },
@@ -30,6 +32,27 @@ module Response
             current_weather: forecast_data[:current_weather],
             daily_weather: forecast_data[:daily_weather],
             hourly_weather: forecast_data[:hourly_weather]
+          }
+        }
+      },
+      status: status
+    )
+  end
+
+  def book_search_response(books_data, forecast_data, status = :ok)
+    render(
+      json: {
+        data: {
+          id: nil,
+          type: 'books',
+          attributes: {
+            destination: books_data[:destination],
+            forecast: {
+              summary: forecast_data.conditions,
+              temperature: "#{forecast_data.temperature.round} F"
+            },
+            total_books_found: books_data[:total_books_found],
+            books: books_data[:books]
           }
         }
       },
