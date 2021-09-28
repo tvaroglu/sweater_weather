@@ -27,7 +27,8 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.filter_sensitive_data('DONT_SHARE_MY_SECRET_KEY') { ENV['mq'] }
   config.filter_sensitive_data('DONT_SHARE_MY_SECRET_KEY') { ENV['ow'] }
-  # TODO: understand why the record: :new_episodes block is required due to the OpenWeatherAPI calls..
+  # new_episodes mode required for OpenWeather API calls..
+  # (something to do with how real-time data is queried and returned with each request)
   config.default_cassette_options = { re_record_interval: 7.days, record: :new_episodes }
   config.configure_rspec_metadata!
 end
