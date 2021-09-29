@@ -215,7 +215,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Successful POST Request\", function () {",
-									"    pm.expect(pm.response.code).to.eql(200);",
+									"    pm.expect(pm.response.code).to.eql(201);",
 									"});",
 									"",
 									"pm.test(\"User Session Created\", function () {",

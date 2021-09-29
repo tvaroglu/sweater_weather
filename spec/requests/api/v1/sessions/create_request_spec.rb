@@ -28,7 +28,7 @@ describe 'Sessions::Create API', type: :request do
         expect(json_data[:attributes][:api_key]).to eq current_user.api_key
       end
 
-      include_examples 'status code 200'
+      include_examples 'status code 201'
     end
 
     describe 'edge cases' do
