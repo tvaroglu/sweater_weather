@@ -94,4 +94,12 @@ module Response
       status: status
     )
   end
+
+  def invalid_query
+    'your query could not be completed'
+  end
+
+  def record_invalid
+    'your record could not be saved'
+  end
 end

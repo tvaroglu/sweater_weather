@@ -10,9 +10,9 @@ class ThirdPartyFacade
       Route.new(query[:route], from, to)
     end
 
-    def get_destination_forecast(lat, lon, travel_time)
+    def get_route_forecast(lat, lon, travel_time)
       query = OpenWeatherService.get_hourly_forecast(lat, lon)
-      return unless travel_time != 'Impossible Route'
+      return if travel_time == 'Impossible Route'
 
       index = (travel_time[0..1].to_i + (travel_time[3..4].to_i / 60.to_f)).round
       HourlyForecast.new(query[:hourly][index])

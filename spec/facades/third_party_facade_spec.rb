@@ -116,14 +116,14 @@ RSpec.describe ThirdPartyFacade do
       end
     end
 
-    describe '#get_destination_forecast' do
+    describe '#get_route_forecast' do
       let(:valid_destination) { 'Washington, DC' }
       let(:invalid_destination) { 'London, UK' }
 
       it 'can return a forecast object for a possible route', :vcr do
         lat_lon = ThirdPartyFacade.get_lat_lon(valid_destination)
         route = ThirdPartyFacade.get_route(city_state, valid_destination)
-        expected = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
+        expected = ThirdPartyFacade.get_route_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
 
         expect(route.travel_time).not_to eq 'Impossible Route'
         expect(route.formatted_travel_time).not_to eq 'Impossible Route'
@@ -134,7 +134,7 @@ RSpec.describe ThirdPartyFacade do
       it 'can return a blank forecast object for an impossible route', :vcr do
         lat_lon = ThirdPartyFacade.get_lat_lon(valid_destination)
         route = ThirdPartyFacade.get_route(city_state, invalid_destination)
-        expected = ThirdPartyFacade.get_destination_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
+        expected = ThirdPartyFacade.get_route_forecast(lat_lon.lat, lat_lon.lon, route.travel_time)
 
         expect(route.travel_time).to eq 'Impossible Route'
         expect(route.formatted_travel_time).to eq 'Impossible Route'

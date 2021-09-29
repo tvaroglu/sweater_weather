@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   def create
     if user_params[:password_confirmation].blank?
-      json_error_response('your record could not be saved', params_errors[:password_confirmation])
+      json_error_response(record_invalid, params_errors[:password_confirmation])
     else
       new_user = User.create!(user_params)
       if new_user.save

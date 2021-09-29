@@ -1,9 +1,9 @@
 class Api::V1::BookSearchController < ApplicationController
   def index
     if params[:location].blank?
-      json_error_response('your query could not be completed', params_errors[:city_state])
+      json_error_response(invalid_query, params_errors[:city_state])
     elsif params[:quantity].to_i <= 0
-      json_error_response('your query could not be completed', params_errors[:quantity])
+      json_error_response(invalid_query, params_errors[:quantity])
     else
       lat_lon = ThirdPartyFacade.get_lat_lon(params[:location])
       current_forecast = ThirdPartyFacade.get_forecast(lat_lon.lat, lat_lon.lon)[:current_weather]
