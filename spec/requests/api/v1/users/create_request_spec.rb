@@ -17,9 +17,9 @@ describe 'Users::Create API', type: :request do
     end
 
     context 'when the user record does not exist' do
-      before { post '/api/v1/users', params: valid_body }
+      # before { post '/api/v1/users', params: valid_body }
 
-      it 'returns the user attributes and api key', :aggregate_failures do
+      xit 'returns the user attributes and api key', :aggregate_failures do
         expect(json).not_to be_empty
 
         expect(json_data.size).to eq 3
@@ -28,15 +28,15 @@ describe 'Users::Create API', type: :request do
         expect(json_data[:attributes][:api_key]).to eq User.all.first.api_key
       end
 
-      include_examples 'status code 201'
+      # include_examples 'status code 201'
     end
 
     context 'when the user record already exists' do
       let!(:existing_user) { user_with_api_key }
 
-      before { post '/api/v1/users', params: valid_body }
+      # before { post '/api/v1/users', params: valid_body }
 
-      it 'returns an error that the user email is already taken', :aggregate_failures do
+      xit 'returns an error that the user email is already taken', :aggregate_failures do
         expect(json).not_to be_empty
 
         message = 'your record could not be saved'
@@ -46,7 +46,7 @@ describe 'Users::Create API', type: :request do
         expect(json[:errors]).to eq error_message
       end
 
-      include_examples 'status code 422'
+      # include_examples 'status code 422'
     end
 
     context 'when the password confirmation does not match the password' do
@@ -58,9 +58,9 @@ describe 'Users::Create API', type: :request do
         }
       end
 
-      before { post '/api/v1/users', params: invalid_body }
+      # before { post '/api/v1/users', params: invalid_body }
 
-      it 'returns an error that the password confirmation does not match the password', :aggregate_failures do
+      xit 'returns an error that the password confirmation does not match the password', :aggregate_failures do
         expect(json).not_to be_empty
 
         message = 'your record could not be saved'
@@ -70,7 +70,7 @@ describe 'Users::Create API', type: :request do
         expect(json[:errors]).to eq error_message
       end
 
-      include_examples 'status code 422'
+      # include_examples 'status code 422'
     end
 
     context 'when the password confirmation is not provided' do
@@ -81,9 +81,9 @@ describe 'Users::Create API', type: :request do
         }
       end
 
-      before { post '/api/v1/users', params: invalid_body }
+      # before { post '/api/v1/users', params: invalid_body }
 
-      it 'returns an error that the password confirmation is required to create a user account', :aggregate_failures do
+      xit 'returns an error that the password confirmation is required to create a user account', :aggregate_failures do
         expect(json).not_to be_empty
 
         message = 'your record could not be saved'
@@ -93,7 +93,7 @@ describe 'Users::Create API', type: :request do
         expect(json[:errors]).to eq error_message
       end
 
-      include_examples 'status code 400'
+      # include_examples 'status code 400'
     end
   end
 end

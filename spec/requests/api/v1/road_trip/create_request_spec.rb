@@ -24,9 +24,9 @@ describe 'RoadTrip::Create API', type: :request do
         }
       end
 
-      before { post '/api/v1/road_trip', params: valid_route }
+      # before { post '/api/v1/road_trip', params: valid_route }
 
-      it 'returns the requested road trip attributes', :aggregate_failures do
+      xit 'returns the requested road trip attributes', :aggregate_failures do
         expect(json).not_to be_empty
 
         expect(json_data.size).to eq 3
@@ -36,7 +36,7 @@ describe 'RoadTrip::Create API', type: :request do
         expect(json_data[:attributes][:weather_at_eta][:conditions].class).to eq String
       end
 
-      include_examples 'status code 201'
+      # include_examples 'status code 201'
     end
 
     context 'when the user is authenticated and provides an invalid request', :vcr do
@@ -48,9 +48,9 @@ describe 'RoadTrip::Create API', type: :request do
         }
       end
 
-      before { post '/api/v1/road_trip', params: invalid_route }
+      # before { post '/api/v1/road_trip', params: invalid_route }
 
-      it 'returns road trip attributes with an impossible route and empty forecast', :aggregate_failures do
+      xit 'returns road trip attributes with an impossible route and empty forecast', :aggregate_failures do
         expect(json).not_to be_empty
 
         expect(json_data.size).to eq 3
@@ -61,7 +61,7 @@ describe 'RoadTrip::Create API', type: :request do
         expect(json_data[:attributes][:weather_at_eta][:conditions].class).to eq NilClass
       end
 
-      include_examples 'status code 201'
+      # include_examples 'status code 201'
     end
 
     context 'when the user does not provide an API key' do
@@ -72,16 +72,16 @@ describe 'RoadTrip::Create API', type: :request do
         }
       end
 
-      before { post '/api/v1/road_trip', params: invalid_body }
+      # before { post '/api/v1/road_trip', params: invalid_body }
 
-      it 'returns an error that the user is unauthorized', :aggregate_failures do
+      xit 'returns an error that the user is unauthorized', :aggregate_failures do
         expect(json).not_to be_empty
 
         expect(json[:message]).to eq message
         expect(json[:errors]).to eq auth_error_message
       end
 
-      include_examples 'status code 401'
+      # include_examples 'status code 401'
     end
 
     context 'when the user does not provide a valid API key' do
@@ -93,16 +93,16 @@ describe 'RoadTrip::Create API', type: :request do
         }
       end
 
-      before { post '/api/v1/road_trip', params: invalid_body }
+      # before { post '/api/v1/road_trip', params: invalid_body }
 
-      it 'returns an error that the user is unauthorized', :aggregate_failures do
+      xit 'returns an error that the user is unauthorized', :aggregate_failures do
         expect(json).not_to be_empty
 
         expect(json[:message]).to eq message
         expect(json[:errors]).to eq auth_error_message
       end
 
-      include_examples 'status code 401'
+      # include_examples 'status code 401'
     end
 
     context 'when the user does not provide route parameters' do
@@ -113,16 +113,16 @@ describe 'RoadTrip::Create API', type: :request do
         }
       end
 
-      before { post '/api/v1/road_trip', params: invalid_body }
+      # before { post '/api/v1/road_trip', params: invalid_body }
 
-      it 'returns an error that the user is unauthorized', :aggregate_failures do
+      xit 'returns an error that the user is unauthorized', :aggregate_failures do
         expect(json).not_to be_empty
 
         expect(json[:message]).to eq message
         expect(json[:errors]).to eq route_error_message
       end
 
-      include_examples 'status code 400'
+      # include_examples 'status code 400'
     end
   end
 end
